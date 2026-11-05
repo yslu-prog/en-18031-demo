@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>EN 18031 檢測與 CRA 銜接｜RED 無線產品網路安全｜台北實驗室 × Applus+</title>
+<meta name="description" content="EN 18031 已強制適用，2027 年 12 月 11 日起 CRA 將取代 RED 資安規範。安合規律 ISO/IEC 17025 實驗室執行 EN 18031 檢測，4 個問題快速判斷適用標準，並了解 8 步檢測流程與送測準備清單。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Inter:wght@500;700&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --navy:#0b1f3a; --navy-2:#132d52; --blue:#1f6fd1; --teal:#4ba3a3; --orange:#f39200;
+  --ink:#1a2433; --muted:#5b6778; --line:#dfe5ee; --bg:#ffffff; --bg-2:#f4f7fb;
+  --ok:#1f8a5b; --warn:#b4540a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Noto Sans TC","Inter",system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;font-size:16px}
+a{color:var(--blue)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+section{padding:80px 0}
+.eyebrow{font-family:Inter,sans-serif;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);font-weight:700;margin:0 0 10px}
+h1,h2,h3{line-height:1.3;margin:0}
+h2{font-size:clamp(26px,3.2vw,36px);margin-bottom:14px}
+h3{font-size:19px}
+.lead{color:var(--muted);max-width:720px;margin:0 0 40px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:6px;font-weight:700;text-decoration:none;border:2px solid transparent;cursor:pointer;font-size:15px;font-family:inherit}
+.btn-primary{background:var(--orange);color:#fff}
+.btn-primary:hover{background:#d98200}
+.btn-ghost{border-color:rgba(255,255,255,.5);color:#fff;background:transparent}
+.btn-ghost:hover{background:rgba(255,255,255,.08)}
+.btn-outline{border-color:var(--navy);color:var(--navy);background:#fff}
+.btn-outline:hover{background:var(--bg-2)}
+
+/* nav */
+header{position:sticky;top:0;z-index:20;background:rgba(11,31,58,.97);color:#fff}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:Inter,sans-serif;font-weight:700;letter-spacing:.04em;color:#fff;text-decoration:none}
+.logo span{color:var(--teal)}
+nav a{color:#cfd8e6;text-decoration:none;margin-left:22px;font-size:14px}
+nav a.active,nav a:hover{color:#fff}
+@media(max-width:860px){nav{display:none}}
+
+/* hero */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 60%,#17406f 100%);color:#fff;padding:96px 0 88px}
+.hero h1{font-size:clamp(32px,4.6vw,52px);margin:0 0 18px}
+.hero p{color:#c9d4e4;max-width:680px;font-size:18px;margin:0 0 32px}
+.hero .ctas{display:flex;gap:14px;flex-wrap:wrap}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:44px}
+.badges span{border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:6px 14px;font-size:13px;color:#dbe3ef}
+
+/* standards */
+.std-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.std{border:1px solid var(--line);border-radius:10px;padding:26px;background:#fff}
+.std .code{font-family:Inter,sans-serif;font-weight:700;color:var(--blue);font-size:22px}
+.std .art{font-size:13px;color:var(--muted);margin:2px 0 12px}
+.std p{margin:0;color:var(--muted);font-size:15px}
+.note-bar{margin-top:24px;background:var(--bg-2);border-left:4px solid var(--orange);padding:14px 18px;border-radius:4px;font-size:15px}
+@media(max-width:860px){.std-grid{grid-template-columns:1fr}}
+
+/* checker */
+.checker-sec{background:var(--bg-2)}
+.checker{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start}
+.panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:30px}
+.progress{display:flex;gap:6px;margin-bottom:22px}
+.progress i{flex:1;height:4px;border-radius:2px;background:var(--line)}
+.progress i.on{background:var(--blue)}
+.qnum{font-size:13px;color:var(--muted);margin-bottom:6px}
+.qtext{font-size:22px;font-weight:700;margin:0 0 8px}
+.qhint{color:var(--muted);font-size:14px;margin:0 0 24px}
+.answers{display:flex;gap:12px}
+.answers button{flex:1;padding:16px;border-radius:8px;border:2px solid var(--line);background:#fff;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit;color:var(--ink)}
+.answers button:hover{border-color:var(--blue);color:var(--blue)}
+.back{background:none;border:none;color:var(--muted);margin-top:18px;cursor:pointer;font-family:inherit;font-size:14px;padding:0}
+.back:hover{color:var(--ink)}
+.result-tags{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 18px}
+.tag{font-family:Inter,sans-serif;font-weight:700;padding:8px 14px;border-radius:6px;background:var(--navy);color:#fff}
+.tag.na{background:var(--muted)}
+.nb{border-radius:8px;padding:14px 16px;font-size:15px;margin-bottom:20px}
+.nb.must{background:#fff3e6;border:1px solid #f5c58a;color:var(--warn)}
+.nb.maybe{background:#eef5ff;border:1px solid #bcd4f5;color:#1d4f8f}
+.trail{list-style:none;padding:0;margin:0}
+.trail li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+.trail li:last-child{border-bottom:none}
+.trail b{white-space:nowrap}
+.trail .yes{color:var(--ok)} .trail .no{color:var(--warn)}
+.side h3{margin-bottom:12px}
+.side .empty{color:var(--muted);font-size:15px}
+.disclaimer{font-size:13px;color:var(--muted);margin-top:16px}
+@media(max-width:860px){.checker{grid-template-columns:1fr}}
+
+/* NB section */
+.nb-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.route{border-radius:12px;padding:30px;border:1px solid var(--line)}
+.route.self{background:#fff}
+.route.nbr{background:var(--navy);color:#fff;border-color:var(--navy)}
+.route.nbr p,.route.nbr li{color:#c9d4e4}
+.route h3{margin-bottom:10px}
+.route ul{padding-left:20px;margin:12px 0 0}
+.route li{margin-bottom:6px}
+.route .lbl{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;padding:4px 10px;border-radius:999px;margin-bottom:14px}
+.route.self .lbl{background:var(--bg-2);color:var(--muted)}
+.route.nbr .lbl{background:var(--orange);color:#fff}
+.center{text-align:center;margin-top:32px}
+@media(max-width:860px){.nb-grid{grid-template-columns:1fr}}
+
+/* services */
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.svc{border:1px solid var(--line);border-radius:10px;padding:24px;background:#fff}
+.svc .n{font-family:Inter,sans-serif;color:var(--teal);font-weight:700;font-size:14px}
+.svc h3{margin:8px 0 8px;font-size:18px}
+.svc p{margin:0;color:var(--muted);font-size:14.5px}
+@media(max-width:960px){.svc-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.svc-grid{grid-template-columns:1fr}}
+
+/* process */
+.process{background:var(--bg-2)}
+.steps{display:grid;grid-template-columns:repeat(7,1fr);gap:0;counter-reset:s;position:relative}
+.step{padding:0 8px;text-align:center;position:relative}
+.step::before{counter-increment:s;content:counter(s);display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;background:#fff;border:2px solid var(--blue);color:var(--blue);font-weight:700;margin:0 auto 12px;font-family:Inter,sans-serif;position:relative;z-index:1}
+.step::after{content:"";position:absolute;top:22px;left:50%;width:100%;height:2px;background:#bcd4f5}
+.step:last-child::after{display:none}
+.step h3{font-size:15px;margin-bottom:4px}
+.step p{font-size:13px;color:var(--muted);margin:0}
+.step .who{display:inline-block;font-size:11px;font-weight:700;color:var(--teal);margin-top:6px}
+.arch{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.arch div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px}
+.arch b{display:block;margin-bottom:4px}
+.arch span{font-size:14px;color:var(--muted)}
+@media(max-width:960px){.steps{grid-template-columns:1fr;gap:18px}.step{display:grid;grid-template-columns:44px 1fr;gap:14px;text-align:left;padding:0}.step::before{margin:0}.step::after{display:none}.arch{grid-template-columns:1fr}}
+
+/* prep */
+.prep{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.assets{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.assets div{border:1px solid var(--line);border-radius:8px;padding:16px;font-weight:700}
+.assets small{display:block;font-weight:400;color:var(--muted);font-size:13px}
+.checklist{list-style:none;padding:0;margin:0 0 24px}
+.checklist li{padding:10px 0 10px 30px;border-bottom:1px solid var(--line);position:relative;font-size:15px}
+.checklist li::before{content:"";position:absolute;left:4px;top:16px;width:12px;height:7px;border-left:2px solid var(--teal);border-bottom:2px solid var(--teal);transform:rotate(-45deg)}
+@media(max-width:860px){.prep{grid-template-columns:1fr}}
+
+/* faq */
+.faq{background:var(--bg-2)}
+details{background:#fff;border:1px solid var(--line);border-radius:8px;margin-bottom:12px;padding:0 22px}
+summary{cursor:pointer;font-weight:700;padding:18px 0;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--blue);font-size:22px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin:0 0 18px;color:var(--muted)}
+
+/* related */
+.related{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.related a{display:block;border:1px solid var(--line);border-radius:10px;padding:20px;text-decoration:none;color:var(--ink);font-weight:700}
+.related a span{display:block;font-weight:400;color:var(--muted);font-size:14px;margin-top:4px}
+.related a:hover{border-color:var(--blue)}
+@media(max-width:760px){.related{grid-template-columns:1fr}}
+
+/* contact */
+.contact{background:var(--navy);color:#fff}
+.contact .lead{color:#c9d4e4}
+form{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:760px}
+form label{font-size:13px;color:#c9d4e4;display:flex;flex-direction:column;gap:6px}
+form .full{grid-column:1/-1}
+input,select,textarea{font-family:inherit;font-size:15px;padding:12px;border-radius:6px;border:1px solid #33507a;background:#0f294b;color:#fff}
+textarea{min-height:110px}
+@media(max-width:640px){form{grid-template-columns:1fr}}
+footer{background:#081629;color:#8d9bb0;font-size:13px;padding:28px 0}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* v2 additions */
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.15);border-radius:10px;overflow:hidden;margin-top:44px}
+.facts div{background:rgba(11,31,58,.55);padding:20px 22px}
+.facts b{display:block;font-size:13px;color:var(--teal);letter-spacing:.06em;margin-bottom:4px}
+.facts span{color:#fff;font-size:16px}
+@media(max-width:760px){.facts{grid-template-columns:1fr}}
+.test-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.test{border:1px solid var(--line);border-radius:10px;padding:20px;background:#fff}
+.test h3{font-size:16px;margin-bottom:6px}
+.test p{margin:0;color:var(--muted);font-size:14px}
+@media(max-width:960px){.test-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.test-grid{grid-template-columns:1fr}}
+.scope-tbl{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:15px}
+.scope-tbl th,.scope-tbl td{padding:16px 18px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.scope-tbl tr:last-child td{border-bottom:none}
+.scope-tbl thead th{background:var(--navy);color:#fff;font-size:16px}
+.scope-tbl tbody th{width:140px;color:var(--muted);font-weight:500;background:var(--bg-2)}
+.effort{display:inline-block;padding:3px 10px;border-radius:999px;font-size:13px;font-weight:700}
+.e1{background:#e6f4ec;color:var(--ok)} .e2{background:#eef5ff;color:#1d4f8f} .e3{background:#fff3e6;color:var(--warn)}
+.tbl-wrap{overflow-x:auto}
+.scope-note{font-size:14px;color:var(--muted);margin-top:14px}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:f}
+.flow div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px;position:relative}
+.flow div::before{counter-increment:f;content:counter(f,decimal-leading-zero);font-family:Inter,sans-serif;font-weight:700;color:var(--blue);font-size:14px}
+.flow h3{font-size:16px;margin:6px 0}
+.flow p{margin:0;font-size:14px;color:var(--muted)}
+.flow .who{display:inline-block;margin-top:10px;font-size:12px;font-weight:700;color:var(--teal)}
+.flow .loop{border-color:#f5c58a;background:#fffaf3}
+@media(max-width:960px){.flow{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.flow{grid-template-columns:1fr}}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:28px}
+.box{background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px}
+.box h3{margin-bottom:12px}
+@media(max-width:860px){.two{grid-template-columns:1fr}}
+.gaps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.gap{border-top:4px solid var(--orange);background:#fff;border-radius:0 0 10px 10px;padding:22px;box-shadow:0 1px 0 var(--line) inset,1px 0 0 var(--line) inset,-1px 0 0 var(--line) inset,0 -1px 0 var(--line) inset}
+.gap h3{font-size:17px;margin-bottom:8px}
+.gap p{margin:0;color:var(--muted);font-size:14.5px}
+@media(max-width:860px){.gaps{grid-template-columns:1fr}}
+.chips{display:flex;gap:14px;flex-wrap:wrap}
+.chips label{flex-direction:row;align-items:center;gap:6px;color:#fff;font-size:14px}
+.chips input{width:auto}
+
+/* ===== v3 ===== */
+:root{--tech:#2f7bf6;--tech-2:#5ea1ff;--alert:#ff5a5f;--alert-soft:rgba(255,90,95,.12);--dark:#07121f;--dark-2:#0d1d31;--dark-line:#1f3552}
+.btn-blue{background:var(--tech);color:#fff}
+.btn-blue:hover{background:#1f68e0}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.hero .eyebrow{color:var(--tech-2);font-size:13px;letter-spacing:.04em;text-transform:none}
+.hero h1{font-size:clamp(30px,4.2vw,50px)}
+.hero h1 em{font-style:normal;color:var(--tech-2)}
+.hero-sub{font-size:clamp(16px,1.6vw,19px);font-weight:400;color:#c9d4e4;max-width:760px;margin:0 0 32px;line-height:1.75}
+.hero-sub b{color:#fff;font-weight:700}
+
+/* quiz q4 */
+.risk-list{list-style:none;padding:0;margin:0 0 22px;display:grid;gap:10px}
+.risk-list li{display:flex;gap:12px;align-items:flex-start;background:var(--bg-2);border-radius:8px;padding:12px 14px;font-size:15px}
+.risk-list .n{flex:none;width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:Inter,sans-serif}
+.risk-list small{color:var(--muted);font-family:Inter,sans-serif}
+.res-head{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:700;margin:4px 0 6px}
+.res-head .dot{width:12px;height:12px;border-radius:50%}
+.stateA .dot{background:var(--orange)} .stateB .dot{background:var(--tech)} .stateC .dot,.stateN .dot{background:var(--muted)}
+.res-body{color:var(--muted);font-size:15px;margin:0 0 18px}
+.res-body b{color:var(--ink)}
+.flag{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;margin-bottom:8px}
+.stateA .flag{background:#fff3e6;color:var(--warn)} .stateB .flag{background:#eaf2ff;color:#1d4f8f} .stateC .flag,.stateN .flag{background:var(--bg-2);color:var(--muted)}
+
+/* timeline */
+.tl{position:relative;margin-top:8px}
+.tl::before{content:"";position:absolute;left:23px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--tech),#bcd4f5)}
+.st{position:relative;padding-left:68px;margin-bottom:16px}
+.st .num{position:absolute;left:0;top:14px;width:48px;height:48px;border-radius:50%;background:#fff;border:2px solid var(--tech);color:var(--tech);font-family:Inter,sans-serif;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:1}
+.st.hot .num{border-color:var(--orange);color:var(--orange)}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 22px;transition:border-color .2s,box-shadow .2s}
+.st.hot .card{background:#fffaf3;border-color:#f5d3a6}
+.roles{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+.role{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px}
+.role .ic{width:13px;height:13px}
+.r-m{background:#eef1f5;color:#4a5568} .r-l{background:#e3eeff;color:#1d5bc4} .r-n{background:#fff0dc;color:#a35a00}
+.roles .arr{color:var(--muted);font-size:13px}
+.card h3{font-size:18px;margin-bottom:4px}
+.card p{margin:0;color:var(--muted);font-size:15px}
+.exp-btn{margin-top:12px;display:inline-flex;align-items:center;gap:8px;background:none;border:1.5px solid var(--tech);color:var(--tech);border-radius:6px;padding:8px 14px;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;min-height:40px}
+.exp-btn:hover{background:#eaf2ff}
+.exp-btn .pm{font-family:Inter,sans-serif;font-size:18px;line-height:1;transition:transform .25s}
+.st.open .exp-btn .pm{transform:rotate(45deg)}
+.st.open .card{border-color:var(--tech);box-shadow:0 8px 28px rgba(47,123,246,.12)}
+.detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.st.open .detail{grid-template-rows:1fr}
+.detail>div{overflow:hidden}
+.detail-inner{border-top:1px dashed var(--line);margin-top:16px;padding-top:16px}
+.detail-inner h4{margin:0 0 10px;font-size:15px;color:var(--navy)}
+.detail-inner p{font-size:15px}
+.scope-tbl.sm{font-size:14px}
+.scope-tbl.sm th,.scope-tbl.sm td{padding:12px 14px}
+.lv{display:inline-flex;align-items:center;gap:6px;font-weight:700;white-space:nowrap}
+.lv i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.lv1 i{background:#22a06b} .lv2 i{background:#f2b705} .lv3 i{background:#e5484d}
+.tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tech{display:flex;gap:12px;background:var(--bg-2);border-radius:10px;padding:14px}
+.tech .ico{flex:none;width:38px;height:38px;border-radius:8px;background:#e3eeff;color:var(--tech);display:flex;align-items:center;justify-content:center}
+.tech b{display:block;font-size:15px;margin-bottom:2px}
+.tech span{font-size:14px;color:var(--muted)}
+@media(max-width:700px){.tech-grid{grid-template-columns:1fr}.st{padding-left:58px}.st .num{width:40px;height:40px;top:16px}.tl::before{left:19px}}
+.summary{margin-top:28px;background:var(--navy);color:#fff;border-radius:14px;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.summary h3{font-size:17px;margin-bottom:10px;display:flex;align-items:center;gap:8px;color:#fff}
+.summary h3 .ic{color:var(--tech-2)}
+.summary p{margin:0;color:#c9d4e4;font-size:15px}
+.summary ul{list-style:none;margin:0;padding:0}
+.summary li{display:flex;gap:10px;color:#dbe3ef;font-size:15px;padding:6px 0}
+.summary li .ic{color:#4cd39b;width:18px;height:18px;margin-top:3px}
+@media(max-width:760px){.summary{grid-template-columns:1fr}}
+
+/* prep dark */
+.prep-dark{background:radial-gradient(1200px 500px at 85% -10%,rgba(47,123,246,.18),transparent 60%),var(--dark);color:#e6edf7}
+.prep-dark .eyebrow{color:var(--tech-2)}
+.prep-dark h2{color:#fff}
+.prep-dark .lead{color:#9fb0c7}
+.warns{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:56px}
+.warn{background:var(--dark-2);border:1px solid rgba(255,90,95,.35);border-radius:14px;padding:24px;transition:transform .25s,box-shadow .25s,border-color .25s}
+.warn:hover{transform:translateY(-6px);border-color:var(--alert);box-shadow:0 14px 32px rgba(255,90,95,.14)}
+.warn .wi{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.warn .wic{width:44px;height:44px;border-radius:10px;background:var(--alert-soft);color:var(--alert);display:flex;align-items:center;justify-content:center}
+.warn .wi .ic{width:22px;height:22px}
+.warn .tag-a{font-size:12px;font-weight:700;color:var(--alert);letter-spacing:.06em}
+.warn h3{color:#fff;font-size:18px;margin-bottom:8px}
+.warn p{margin:0;color:#9fb0c7;font-size:15px}
+@media(max-width:860px){.warns{grid-template-columns:1fr}}
+.ck-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.ck-head h3{color:#fff;font-size:20px}
+.meter{min-width:240px;flex:1;max-width:360px}
+.meter .lbl{display:flex;justify-content:space-between;font-size:13px;color:#9fb0c7;margin-bottom:6px}
+.meter .lbl b{color:#fff;font-family:Inter,sans-serif}
+.meter .bar{height:8px;border-radius:4px;background:var(--dark-line);overflow:hidden}
+.meter .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--tech),#4cd39b);transition:width .35s}
+.groups{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:860px){.groups{grid-template-columns:1fr}}
+.grp{background:var(--dark-2);border:1px solid var(--dark-line);border-radius:14px;overflow:hidden}
+.grp-h{width:100%;display:flex;justify-content:space-between;align-items:center;gap:12px;background:none;border:none;color:#fff;padding:18px 20px;cursor:pointer;font-family:inherit;text-align:left}
+.grp-h .t{font-size:16px;font-weight:700}
+.grp-h .t small{display:block;font-weight:400;color:#9fb0c7;font-size:13px;margin-top:2px}
+.grp-h .cnt{font-family:Inter,sans-serif;font-size:13px;color:var(--tech-2);white-space:nowrap}
+.grp-b{border-top:1px solid var(--dark-line);padding:6px 10px 10px}
+.item{display:flex;gap:14px;align-items:flex-start;padding:14px 10px;min-height:56px;border-radius:10px;cursor:pointer;transition:background .2s}
+.item:hover{background:rgba(255,255,255,.04)}
+.item input{position:absolute;opacity:0;pointer-events:none}
+.box-c{flex:none;width:26px;height:26px;border-radius:7px;border:2px solid #3d5a80;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-top:1px}
+.box-c .ic{width:16px;height:16px;color:#fff;opacity:0;transform:scale(.5);transition:all .2s;stroke-width:3}
+.item input:focus-visible+.box-c{outline:2px solid var(--tech-2);outline-offset:2px}
+.item .txt b{display:block;font-weight:500;color:#e6edf7;font-size:15.5px;transition:color .2s}
+.item .txt small{display:block;color:#8496ae;font-size:13.5px;margin-top:2px}
+.item .txt small em{font-style:normal;color:var(--tech-2)}
+.item.done .box-c{background:var(--tech);border-color:var(--tech)}
+.item.done .box-c .ic{opacity:1;transform:scale(1)}
+.item.done .txt{opacity:.5}
+.item.done .txt b{text-decoration:line-through;text-decoration-color:var(--tech-2)}
+.ck-cta{text-align:center;margin-top:40px}
+.btn-lg{padding:18px 30px;font-size:16px;border-radius:8px;box-shadow:0 10px 30px rgba(47,123,246,.35)}
+.ck-cta p{color:#8496ae;font-size:13px;margin:12px 0 0}
+
+/* ===== v4 · SVS brand / fintech ===== */
+:root{
+  --navy:#062438; --navy-2:#0a3352; --brand-navy:#004f78; --teal:#23b6bc; --orange:#ea6023;
+  --blue:#08808a; --tech:#08808a; --tech-2:#ff7a3d; --ink:#0f1e2e; --muted:#5a6b7d; --line:#e2e8ef; --bg-2:#f5f8fa;
+  --dark:#041a2a; --dark-2:#0a2639; --dark-line:#163a54;
+}
+body{letter-spacing:.01em}
+.eyebrow{color:var(--blue)}
+.hero .eyebrow,.prep-dark .eyebrow,.contact .eyebrow{color:var(--tech-2)}
+/* header: white, logo */
+header{background:rgba(255,255,255,.92);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line);color:var(--ink)}
+.logo{display:flex;align-items:center;gap:10px;color:var(--brand-navy)}
+.logo img{height:34px;width:auto;display:block}
+.logo .wm{font-family:Inter,sans-serif;font-size:11px;font-weight:700;line-height:1.15;letter-spacing:.08em;color:var(--brand-navy)}
+nav a{color:#3b4a5c}
+nav a.active,nav a:hover{color:var(--brand-navy)}
+nav a.active{box-shadow:inset 0 -2px 0 var(--orange);padding-bottom:4px}
+/* hero */
+.hero{background:
+  radial-gradient(700px 380px at 92% 8%,rgba(35,182,188,.28),transparent 60%),
+  radial-gradient(520px 320px at 70% 110%,rgba(234,96,35,.22),transparent 60%),
+  linear-gradient(160deg,#041a2a 0%,#062a44 55%,#004f78 130%)}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(180deg,#000 30%,transparent);pointer-events:none}
+.hero{position:relative;overflow:hidden}
+.hero .wrap{position:relative}
+.hero h1 em{color:var(--tech-2)}
+.facts{background:rgba(255,255,255,.1)}
+.facts div{background:rgba(4,26,42,.55);backdrop-filter:blur(6px)}
+/* buttons */
+.btn{border-radius:10px}
+.btn-blue,.btn-primary{background:var(--orange);color:#fff}
+.btn-blue:hover,.btn-primary:hover{background:#d4521a}
+.btn-outline{border-color:var(--brand-navy);color:var(--brand-navy)}
+.btn-lg{box-shadow:0 10px 30px rgba(234,96,35,.35)}
+/* cards / radius */
+.panel,.card,.box{border-radius:16px}
+.progress i.on{background:var(--teal)}
+.answers button{border-radius:12px}
+.answers button:hover{border-color:var(--teal);color:var(--blue)}
+.tag{background:var(--brand-navy)}
+/* timeline */
+.tl::before{background:linear-gradient(var(--teal),rgba(35,182,188,.15))}
+.st .num{border-color:var(--teal);color:var(--blue)}
+.st.hot .num{border-color:var(--orange);color:var(--orange)}
+.st.hot .card{background:#fff8f4;border-color:#f7cdb8}
+.hot-tag{display:inline-block;margin-left:auto;font-size:11px;font-weight:700;color:var(--orange);background:#fff0e8;padding:3px 9px;border-radius:999px}
+.exp-btn{border-color:var(--teal);color:var(--blue);border-radius:8px}
+.exp-btn:hover{background:#e8f8f8}
+.st.open .card{border-color:var(--teal);box-shadow:0 10px 30px rgba(35,182,188,.16)}
+.r-l{background:#e3f6f7;color:#06707a} .r-n{background:#e8eef4;color:var(--brand-navy)}
+.tech .ico{background:#e3f6f7;color:var(--blue)}
+.summary{background:linear-gradient(140deg,var(--navy),var(--brand-navy))}
+.summary h3 .ic{color:var(--tech-2)}
+.summary li .ic{color:var(--teal)}
+/* prep dark */
+.prep-dark{background:radial-gradient(1000px 460px at 88% -10%,rgba(35,182,188,.16),transparent 60%),radial-gradient(700px 400px at 0% 110%,rgba(234,96,35,.10),transparent 60%),var(--dark)}
+.meter .bar i{background:linear-gradient(90deg,var(--teal),#7fe0e3)}
+.grp-h .cnt{color:var(--teal)}
+.item.done .box-c{background:var(--teal);border-color:var(--teal)}
+.item .txt small em{color:var(--teal)}
+.item.done .txt b{text-decoration-color:var(--teal)}
+.contact{background:linear-gradient(160deg,#041a2a,#062a44)}
+input,select,textarea{border-color:#1f4a68;background:#0a2a42;border-radius:8px}
+/* quiz v4 */
+.opt-list{display:grid;gap:10px;margin:0 0 18px}
+.opt{display:flex;gap:12px;align-items:center;text-align:left;width:100%;background:#fff;border:2px solid var(--line);border-radius:12px;padding:14px 16px;font-family:inherit;font-size:15px;color:var(--ink);cursor:pointer;min-height:56px;transition:all .15s}
+.opt:hover{border-color:var(--teal)}
+.opt .bx{flex:none;width:22px;height:22px;border-radius:6px;border:2px solid #b8c4d0;display:flex;align-items:center;justify-content:center}
+.opt .bx .ic{width:14px;height:14px;color:#fff;opacity:0;stroke-width:3}
+.opt[aria-pressed="true"]{border-color:var(--teal);background:#effafa}
+.opt[aria-pressed="true"] .bx{background:var(--teal);border-color:var(--teal)}
+.opt[aria-pressed="true"] .bx .ic{opacity:1}
+.opt small{color:var(--muted);font-family:Inter,sans-serif;margin-left:4px}
+.q4-actions{display:flex;gap:12px}
+.q4-actions button{flex:1;padding:14px;border-radius:12px;font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;border:2px solid var(--line);background:#fff;color:var(--ink)}
+.q4-actions .go{background:var(--brand-navy);border-color:var(--brand-navy);color:#fff}
+.q4-actions .go:disabled{opacity:.35;cursor:not-allowed}
+.res-sec{font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.06em;margin:18px 0 10px}
+.sc{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:start}
+.sc .c{font-family:Inter,sans-serif;font-weight:700;color:#fff;background:var(--brand-navy);border-radius:8px;padding:6px 10px;font-size:14px;white-space:nowrap;grid-row:span 3}
+.sc b{font-size:16px}
+.sc .a{font-size:12px;color:var(--muted);font-family:Inter,sans-serif}
+.sc p{margin:0;font-size:14px;color:var(--muted)}
+.sc .why{grid-column:2;font-size:13px;color:var(--blue);background:#effafa;border-radius:6px;padding:4px 8px;margin-top:4px;justify-self:start}
+.route-box{border-radius:12px;padding:18px;margin:6px 0 18px}
+.route-box.nb{background:#fff6f1;border:1px solid #f7cdb8}
+.route-box.self{background:#effafa;border:1px solid #bfe9eb}
+.route-box h4{margin:0 0 6px;font-size:17px;display:flex;align-items:center;gap:8px}
+.route-box .pill{font-size:12px;font-weight:700;color:#fff;border-radius:999px;padding:3px 10px}
+.route-box.nb .pill{background:var(--orange)} .route-box.self .pill{background:var(--blue)}
+.route-box p{margin:0 0 8px;font-size:14.5px;color:var(--ink)}
+.route-box ul{margin:6px 0 8px;padding-left:20px;font-size:14.5px}
+.route-box li.hit{font-weight:700;color:#b5440f}
+.route-box li.off{color:var(--muted)}
+.route-box .neutral{font-size:13.5px;color:var(--muted);margin:0}
+@media(max-width:520px){.sc{grid-template-columns:1fr}.sc .c{grid-row:auto;justify-self:start}.sc .why{grid-column:1}}
+
+/* ===== v5 ===== */
+@media(max-width:640px){.scope-tbl.sm thead{display:none}.scope-tbl.sm,.scope-tbl.sm tbody,.scope-tbl.sm tr,.scope-tbl.sm td{display:block;width:100%}.scope-tbl.sm tr{padding:12px 14px;border-bottom:1px solid var(--line)}.scope-tbl.sm tr:last-child{border-bottom:none}.scope-tbl.sm td{border:none;padding:3px 0}.scope-tbl.sm td:first-child{font-size:15px;margin-bottom:4px}.scope-tbl.sm td:not(:first-child)::before{content:attr(data-l)'：';color:var(--muted);font-weight:700;font-size:13px}}
+.trail .risk{color:var(--orange)}
+.res-ctas{display:flex;gap:10px;flex-wrap:wrap}
+.flow2{display:grid;grid-template-columns:330px 1fr;gap:24px;align-items:start}
+.steplist{list-style:none;margin:0;padding:0;position:sticky;top:88px;display:grid;gap:8px}
+.steplist button{width:100%;display:flex;gap:12px;align-items:center;text-align:left;background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 14px;cursor:pointer;font-family:inherit;color:var(--ink);transition:all .15s;min-height:58px}
+.steplist button:hover{border-color:var(--teal)}
+.steplist .n{flex:none;width:34px;height:34px;border-radius:50%;border:2px solid var(--teal);color:var(--blue);font-family:Inter,sans-serif;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.steplist .tt{flex:1;min-width:0}
+.steplist .tt b{display:block;font-size:14.5px;line-height:1.35}
+.steplist .tt small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.steplist .hot .n{border-color:var(--orange);color:var(--orange)}
+.hot-dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--orange)}
+.steplist button[aria-selected="true"]{border-color:var(--teal);background:#effafa;box-shadow:0 6px 18px rgba(35,182,188,.14)}
+.steplist button[aria-selected="true"] .n{background:var(--teal);border-color:var(--teal);color:#fff}
+.steplist .hot[aria-selected="true"]{border-color:var(--orange);background:#fff6f1;box-shadow:0 6px 18px rgba(234,96,35,.12)}
+.steplist .hot[aria-selected="true"] .n{background:var(--orange);border-color:var(--orange);color:#fff}
+.stage .sp{display:none}
+.stage .sp.active{display:block;animation:spIn .25s ease}
+@keyframes spIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.sp{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px 30px}
+.sp.hot{background:#fff8f4;border-color:#f7cdb8}
+.sp-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.sp-num{font-family:Inter,sans-serif;font-weight:700;color:var(--blue);font-size:12.5px;letter-spacing:.1em}
+.sp.hot .sp-num{color:var(--orange)}
+.sp h3{font-size:21px;margin:4px 0 8px}
+.sp>p{margin:0;color:var(--muted);font-size:15.5px}
+.sp .detail{grid-template-rows:1fr}
+.sp .exp-btn{display:none}
+.sp .detail-inner{margin-top:20px;padding-top:20px}
+.tech b code{font-family:Inter,sans-serif;font-size:11.5px;font-weight:700;color:var(--blue);background:#e3f6f7;border-radius:4px;padding:1px 6px;margin-left:4px}
+.more-mech{margin:14px 0 0;font-size:14px;color:var(--muted);border-left:3px solid var(--teal);padding:4px 0 4px 12px}
+.sp-nav{display:flex;justify-content:space-between;margin-top:14px}
+.sp-nav button{background:none;border:1px solid var(--line);border-radius:8px;padding:10px 16px;font-family:inherit;font-size:14px;color:var(--ink);cursor:pointer;min-height:44px}
+.sp-nav button:hover:not(:disabled){border-color:var(--teal);color:var(--blue)}
+.sp-nav button:disabled{opacity:.35;cursor:default}
+.meter .lbl em{font-style:normal;color:var(--tech-2);font-weight:700}
+@media(max-width:960px){
+  .flow2{grid-template-columns:1fr}
+  .steplist,.sp-nav{display:none}
+  .stage .sp{display:block;margin-bottom:12px;padding:20px;animation:none}
+  .sp .exp-btn{display:inline-flex;margin-top:14px}
+  .sp .detail{grid-template-rows:0fr}
+  .sp.open .detail{grid-template-rows:1fr}
+  .sp.open{border-color:var(--teal);box-shadow:0 10px 30px rgba(35,182,188,.16)}
+  .sp.open .exp-btn .pm{transform:rotate(45deg)}
+  .sp h3{font-size:18px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#"><img src="data:image/png;base64,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" alt="SVS"><span class="wm">SECURE<br>VECTORS<br>SURVEILLANCE</span></a>
+    <nav>
+      <a href="#">檢測服務</a><a href="#">EU CRA</a><a class="active" href="#">EN 18031</a><a href="#">FDA &amp; MDR</a><a href="#">支付與金融</a><a href="#">最新消息</a><a href="#contact">聯絡我們</a>
+    </nav>
+  </div>
+</header>
+
+<!-- 1. HERO -->
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">EU RED（EN 18031）→ CRA（歐盟網路韌性法案）銜接計畫</p>
+    <h1>歐盟 EN 18031 已強制實施，<br>您的產品是否具備<em>銜接 2027 CRA</em> 的能力？</h1>
+    <h2 class="hero-sub">因應 RED 已強制適用與 2027 年 12 月即將到來的 CRA 法規過渡，安合規律結合 Applus+ Laboratories 提供在地檢測與公告機構評估銜接。協助您高效達成 EN 18031 合規要求，並為 CRA 預先累積技術文件與 SBOM。</h2>
+    <div class="ctas">
+      <a class="btn btn-blue" href="#check">30 秒判斷適用標準 ↓</a>
+      <a class="btn btn-ghost" href="#contact" data-prefill="預約 RED → CRA 評估">預約 RED → CRA 評估</a>
+    </div>
+    <div class="facts">
+      <div><b>適用對象</b><span>銷往歐盟之無線與聯網設備（含 Smart POS / IoT）</span></div>
+      <div><b>法規時程</b><span>RED 已強制適用，2027 年底由 CRA 全面接管</span></div>
+      <div><b>合規路徑</b><span>通過 EN 18031 檢測，接軌 CRA</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. 適用判斷 -->
+<section id="check" class="checker-sec">
+  <div class="wrap">
+    <p class="eyebrow">Applicability Check</p>
+    <h2>4 個問題，快速判斷適用標準與合規路徑</h2>
+    <p class="lead">EN 18031 是歐盟認可的調和標準，對應 RED 的 3 項網路安全要求：網路防護（-1）、個資保護（-2）、金流保護（-3）。只要回答 4 個問題，即可看到適用哪份標準、原因，以及可自我宣告或須經公告機構評估。</p>
+    <div class="checker">
+      <div class="panel" id="qpanel" aria-live="polite"></div>
+      <div class="panel side">
+        <h3>您的作答</h3>
+        <div id="trail"><p class="empty">尚未作答</p></div>
+        <p class="disclaimer" id="disc" hidden>本工具結果僅供初步參考，實際適用範圍以產品技術文件與實驗室評估為準。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. 8 步流程 -->
+<section id="process" class="process">
+  <div class="wrap">
+    <p class="eyebrow">Process</p>
+    <h2>從送測到報告出具：8 步檢測流程</h2>
+    <p class="lead">第 5、6 步往往是卡關重災區。安合透過前置的 Gap Analysis（落差分析）提早找出問題，有助於縮短來回修補的時程。點選各步驟，查看實際檢測內容。</p>
+    <div class="flow2">
+      <ol class="steplist" role="tablist"><li><button type="button" role="tab" data-i="0" class="" aria-selected="true"><span class="n">01</span><span class="tt"><b>樣品與架構交付</b><small>製造商</small></span></button></li><li><button type="button" role="tab" data-i="1" class="" aria-selected="false"><span class="n">02</span><span class="tt"><b>EN 18031 標準落差分析</b><small>安合 Lab</small></span></button></li><li><button type="button" role="tab" data-i="2" class="" aria-selected="false"><span class="n">03</span><span class="tt"><b>適用性判定與安全設計審查</b><small>製造商 ⇄ 安合 Lab</small></span></button></li><li><button type="button" role="tab" data-i="3" class="" aria-selected="false"><span class="n">04</span><span class="tt"><b>SBOM 建立與元件掃描</b><small>安合 Lab</small></span></button></li><li><button type="button" role="tab" data-i="4" class="hot" aria-selected="false"><span class="n">05</span><span class="tt"><b>程式掃描與深度滲透</b><small>安合 Lab</small></span><span class="hot-dot" title="卡關重災區"></span></button></li><li><button type="button" role="tab" data-i="5" class="hot" aria-selected="false"><span class="n">06</span><span class="tt"><b>漏洞修補與架構設計調優</b><small>製造商修補 ⇄ 安合複測</small></span><span class="hot-dot" title="卡關重災區"></span></button></li><li><button type="button" role="tab" data-i="6" class="" aria-selected="false"><span class="n">07</span><span class="tt"><b>報告出具與公告機構評估</b><small>安合 Lab → Applus+ Laboratories NB</small></span></button></li><li><button type="button" role="tab" data-i="7" class="" aria-selected="false"><span class="n">08</span><span class="tt"><b>上市合規與文件保存</b><small>製造商</small></span></button></li></ol>
+      <div class="stage">
+<article class="sp active" data-i="0" role="tabpanel">
+  <div class="sp-top"><span class="sp-num">STEP 01 / 08</span></div>
+  <div class="roles"><span class="role r-m" data-ic="user">製造商</span></div>
+  <h3>樣品與架構交付</h3><p>提供檢測所需之實體裝置、App，以及 Server 的存取資訊與技術文件。</p><button class="exp-btn" aria-expanded="false"><span class="pm">＋</span>展開檢測細節</button><div class="detail"><div><div class="detail-inner"><h4>架構決定工作量：您的檢測範圍屬於哪一級？</h4>
+<div class="tbl-wrap"><table class="scope-tbl sm">
+<thead><tr><th>範圍</th><th>適合情境</th><th>必備條件</th><th>工作量與時程</th></tr></thead>
+<tbody>
+<tr><td data-l="範圍"><b>1. 僅裝置</b></td><td data-l="適合情境">產品設定固定、可離線運作</td><td data-l="必備條件">無線功能送測版本須於出廠時關閉</td><td data-l="工作量與時程"><span class="lv lv1"><i></i>最低・最快</span></td></tr>
+<tr><td data-l="範圍"><b>2. 裝置 + App</b></td><td data-l="適合情境">以 App 遠端控制裝置</td><td data-l="必備條件">須具備配對控制與傳輸加密</td><td data-l="工作量與時程"><span class="lv lv2"><i></i>中等</span></td></tr>
+<tr><td data-l="範圍"><b>3. 裝置 + App + Server</b></td><td data-l="適合情境">資料會上傳至伺服器做存儲／運算</td><td data-l="必備條件">除上述外，另加伺服器資料加密與防護</td><td data-l="工作量與時程"><span class="lv lv3"><i></i>最高・需時較長</span></td></tr>
+</tbody></table></div>
+<p class="scope-note">備註：僅用於控制裝置的 App 無法單獨取證，須與實體裝置一併檢測。</p></div></div></div>
+</article><article class="sp" data-i="1" role="tabpanel">
+  <div class="sp-top"><span class="sp-num">STEP 02 / 08</span></div>
+  <div class="roles"><span class="role r-l" data-ic="shield">安合 Lab</span></div>
+  <h3>EN 18031 標準落差分析（Gap Analysis）</h3><p>由 Lab 工程師逐項比對 EN 18031 標準與技術文件，優先找出系統架構與標準要求之間的不符合項目。</p>
+</article><article class="sp" data-i="2" role="tabpanel">
+  <div class="sp-top"><span class="sp-num">STEP 03 / 08</span></div>
+  <div class="roles"><span class="role r-m" data-ic="user">製造商</span><span class="arr">⇄</span><span class="role r-l" data-ic="shield">安合 Lab</span></div>
+  <h3>適用性判定與安全設計審查</h3><p>運用 EN 18031 標準之「決策樹（Decision Trees）」，判定各防護機制的適用性，以及不適用理由的合理性；同時審查安全開發流程（SDLC）紀錄，確認資安需求已納入設計規格。</p><button class="exp-btn" aria-expanded="false"><span class="pm">＋</span>展開檢測細節</button><div class="detail"><div><div class="detail-inner"><h4>本階段檢測重點：適用性判定與安全開發流程</h4><div class="tech-grid"><div class="tech"><div class="ico" data-ic="layers"></div><div><b>決策樹適用性判定 <code>Decision Trees</code></b><span>依 EN 18031 決策樹逐項確認各防護機制的適用路徑，並檢視不適用理由是否完整、合理。</span></div></div><div class="tech"><div class="ico" data-ic="search"></div><div><b>開發流程溯源 <code>SDLC</code></b><span>審查製造商或委外廠商的開發紀錄，確認在分析、設計、實作、驗證 4 大階段中，皆已將資安威脅與防禦機制納入考量。</span></div></div></div></div></div></div>
+</article><article class="sp" data-i="3" role="tabpanel">
+  <div class="sp-top"><span class="sp-num">STEP 04 / 08</span></div>
+  <div class="roles"><span class="role r-l" data-ic="shield">安合 Lab</span></div>
+  <h3>SBOM 建立與元件掃描</h3><p>盤點開源軟體物料清單，找出函式庫與框架中的已知弱點（CVE）。</p><button class="exp-btn" aria-expanded="false"><span class="pm">＋</span>展開檢測細節</button><div class="detail"><div><div class="detail-inner"><h4>本階段檢測重點：開源軟體物料清單（SBOM）</h4><div class="tech"><div class="ico" data-ic="search"></div><div><b>元件與已知弱點掃描 <code>SBOM / CVE</code></b><span>透過專業工具（如 Black Duck）檢查第三方元件、函式庫與框架中是否存在 CVE 已知弱點。有無提供原始碼皆可進行分析。</span></div></div></div></div></div>
+</article><article class="sp hot" data-i="4" role="tabpanel">
+  <div class="sp-top"><span class="sp-num">STEP 05 / 08</span><span class="hot-tag">卡關重災區</span></div>
+  <div class="roles"><span class="role r-l" data-ic="shield">安合 Lab</span></div>
+  <h3>程式掃描與深度滲透</h3><p>逐項執行合規關鍵技術檢測：包含存取控制、加密通訊、更新安全與抗攻擊等機制驗證。</p><button class="exp-btn" aria-expanded="false"><span class="pm">＋</span>展開檢測細節</button><div class="detail"><div><div class="detail-inner"><h4>本階段檢測重點：EN 18031 核心防護機制驗證</h4><p style="margin-bottom:14px">針對裝置、App、Server 及其間的無線連線，逐項進行滲透與安全機制驗證：</p><div class="tech-grid"><div class="tech"><div class="ico" data-ic="phone"></div><div><b>存取控制與配對管理 <code>ACM</code></b><span>檢驗身分存取控制邏輯，驗證未授權的 App 能否取得裝置控制權，並確認配對機制（如實體按鍵確認或配對鑑別）是否能阻擋未授權存取。</span></div></div><div class="tech"><div class="ico" data-ic="user"></div><div><b>身分驗證機制 <code>AUM</code></b><span>確認程式中無硬編碼憑證（Hardcoded Credentials）或通用預設密碼；預設密碼須為每台唯一，或於首次使用時強制變更。</span></div></div><div class="tech"><div class="ico" data-ic="lock"></div><div><b>安全通訊與抗重放防護 <code>SCM</code></b><span>確認裝置、App 與雲端之間的傳輸採用符合最佳實務的加密機制，並驗證控制指令與敏感資料交換是否具備抗重放防護（如 Nonce／時效性權杖）。</span></div></div><div class="tech"><div class="ico" data-ic="refresh"></div><div><b>安全更新機制 <code>SUM</code></b><span>評估更新管道安全性，確認設備具備更新能力，且每次安裝韌體前皆經數位簽章或金鑰驗證來源與完整性。</span></div></div><div class="tech"><div class="ico" data-ic="key"></div><div><b>安全儲存與金鑰保護 <code>SSM / CCK</code></b><span>評估金鑰、權杖（Token）與機敏設定於裝置本地儲存（Flash／EEPROM）時的保護措施。</span></div></div><div class="tech"><div class="ico" data-ic="cpu"></div><div><b>通用設備能力與介面縮減 <code>GEC</code></b><span>確認送測樣品已關閉未使用的網路介面、除錯埠與測試模式，降低攻擊面。</span></div></div></div><p class="more-mech">其他機制（如 RLM、CRY、LGM、DLM、UNM）依產品適用性評估。</p></div></div></div>
+</article><article class="sp hot" data-i="5" role="tabpanel">
+  <div class="sp-top"><span class="sp-num">STEP 06 / 08</span><span class="hot-tag">卡關重災區</span></div>
+  <div class="roles"><span class="role r-m" data-ic="user">製造商修補</span><span class="arr">⇄</span><span class="role r-l" data-ic="shield">安合複測</span></div>
+  <h3>漏洞修補與架構設計調優</h3><p>依據檢測報告，由廠商研發團隊執行漏洞修補，並同步修正底層安全開發設計（如鑑別邏輯、金鑰存放與架構參數）；隨後由安合進行迴圈複測與最終有效性驗證。</p>
+</article><article class="sp" data-i="6" role="tabpanel">
+  <div class="sp-top"><span class="sp-num">STEP 07 / 08</span></div>
+  <div class="roles"><span class="role r-l" data-ic="shield">安合 Lab</span><span class="arr">→</span><span class="role r-n" data-ic="bank">Applus+ Laboratories NB</span></div>
+  <h3>報告出具與公告機構評估</h3><p>安合台北實驗室依 ISO/IEC 17025 出具檢測報告。產品如需公告機構評估，報告可提供予公告機構（如 Applus+ Laboratories，NB 0370）作為審查參考。</p>
+</article><article class="sp" data-i="7" role="tabpanel">
+  <div class="sp-top"><span class="sp-num">STEP 08 / 08</span></div>
+  <div class="roles"><span class="role r-m" data-ic="user">製造商</span></div>
+  <h3>上市合規與文件保存</h3><p>上市後備妥檢測報告與資安技術文件。歐盟主管機關可透過授權代表要求限期提供。</p>
+</article>
+        <div class="sp-nav"><button type="button" id="spPrev">← 上一步</button><button type="button" id="spNext">下一步 →</button></div>
+      </div>
+    </div>
+    <div class="summary">
+      <div>
+        <h3><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>影響時程的關鍵變數</h3>
+        <p>檢測範圍（單一裝置最快；納入 App／Server 則時程增加）、開啟的無線介面數量、開發紀錄的完整度，以及漏洞修補來回的次數。</p>
+      </div>
+      <div>
+        <h3><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8.2 13.4L7 22l5-3 5 3-1.2-8.6"/></svg>完成檢測後，您將取得</h3>
+        <ul>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>依 ISO/IEC 17025 出具的 EN 18031 檢測報告</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>檢測紀錄與發現項目，可作為 RED 技術文件的第三方佐證</li>
+          <li><svg class="ic" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>產品如需公告機構評估，檢測報告可提供予公告機構（如 Applus+ Laboratories，NB 0370）作為審查參考</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. 避坑指南與準備清單 -->
+<section id="prep" class="prep-dark">
+  <div class="wrap">
+    <p class="eyebrow">Before You Start</p>
+    <h2>避開重災區：送測前的準備與自我盤點</h2>
+    <p class="lead">提早盤點並避開以下 3 大缺口，有助於節省修補時間與成本。</p>
+
+    <div class="warns">
+      <div class="warn"><div class="wi"><span class="wic" data-ic="folder"></span><span class="tag-a">缺口 01</span></div><h3>委外開發的資安黑洞</h3><p>軟韌體多由外部開發，卻無人保有「安全開發流程（SDLC）」紀錄，導致審查卡關。</p></div>
+      <div class="warn"><div class="wi"><span class="wic" data-ic="unlock"></span><span class="tag-a">缺口 02</span></div><h3>韌體更新宛如裸奔</h3><p>設備雖具備更新能力，但在安裝前卻缺乏金鑰或簽章來確認更新檔的真實性。</p></div>
+      <div class="warn"><div class="wi"><span class="wic" data-ic="bt"></span><span class="tag-a">缺口 03</span></div><h3>機敏數據明文傳輸</h3><p>過度依賴藍牙預設加密（常未啟用），導致生理或個資數據明文傳輸，違反隱私規範。</p></div>
+    </div>
+
+    <div class="ck-head">
+      <h3>送測準備清單：勾選您已備妥的項目</h3>
+      <div class="meter"><div class="lbl"><span>盤點進度 · <em id="ckMiss">尚缺 10 項</em></span><b id="ckCount">0 / 10</b></div><div class="bar"><i id="ckBar"></i></div></div>
+    </div>
+    <div class="groups" id="groups"></div>
+
+    <div class="ck-cta">
+      <a class="btn btn-blue btn-lg" href="#contact" id="ckCta">帶著您的盤點結果，預約 Lab 合規評估 →</a>
+      <p>點擊後，盤點結果將自動帶入下方表單。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. FAQ -->
+<section id="faq" class="faq">
+  <div class="wrap">
+    <p class="eyebrow">FAQ</p>
+    <h2>EN 18031 常見問題</h2>
+    <div style="margin-top:28px">
+      <details><summary>EN 18031 可以自我宣告嗎？</summary><p>可以。完整套用標準且未涉及限制條件的產品，製造商可自行宣告符合，但仍須備妥技術文件供主管機關調閱。若允許不設定密碼、兒童產品未提供家長存取控制，或適用 EN 18031-3，相關部分須經公告機構評估。</p></details>
+      <details><summary>自我宣告也需要第三方檢測嗎？</summary><p>法規未強制要求。自我宣告的產品，由製造商自行負責備妥技術文件；第三方實驗室的檢測報告可作為技術文件的客觀佐證，於市場抽查或主管機關調閱時，有助於說明產品的符合性。</p></details>
+      <details><summary>App 可以單獨取得認證嗎？</summary><p>無法。僅用於控制裝置的 App 本身不構成獨立功能，須與裝置一併檢測。</p></details>
+      <details><summary>韌體沒有 OTA 更新，會有問題嗎？</summary><p>標準要求的不是 OTA 本身，而是韌體可以更新，且每次更新安裝前都經過驗證。未經驗證的更新方式會被列為不符合項目。無實際更新可能的一次性產品，可提出不設更新機制的理由，由實驗室個案評估。</p></details>
+      <details><summary>產品元件有已知弱點怎麼辦？</summary><p>含已知弱點的元件須於上市前更新或替換；若經評估該弱點在產品中無法被利用，可提出說明，再由實驗室複測確認。</p></details>
+      <details><summary>醫療器材需要符合 EN 18031 嗎？</summary><p>受 MDR／IVDR 規範的醫療器材不在 RED 網路安全要求範圍內，法規上不強制。但 EN 18031 的檢測結果可作為 MDR 與 FDA 資安文件的參考證據。<a href="#">了解醫療器材資安檢測 →</a></p></details>
+      <details><summary>EN 18031 和 EU CRA 有什麼關係？</summary><p>CRA 是歐盟針對數位產品的新資安法規，其技術標準正以 EN 18031 系列為基礎發展。現階段完成 EN 18031 檢測所累積的技術文件與檢測證據，可作為後續 CRA 合規的基礎。<a href="#">了解 EU CRA →</a></p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 8. 聯絡 -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h2>One Lab.</h2>
+    <p class="lead">留下產品資訊，實驗室團隊將於 1–2 個工作天內與您聯繫，確認檢測範圍，並提供書面範圍、時程與費用。</p>
+    <form onsubmit="event.preventDefault();this.querySelector('button').textContent='已送出（示意）'">
+      <label>姓名 *<input required></label>
+      <label>公司 Email *<input type="email" required></label>
+      <label>公司名稱 *<input required></label>
+      <label>國家<input></label>
+      <label class="full">服務項目 *
+        <select id="svcSel">
+          <option>EN 18031 / RED</option><option>EU CRA Conformity</option><option>Medical Device Security</option><option>Payment &amp; Finance Certification</option><option>Security / Penetration Testing</option><option>Other</option>
+        </select>
+      </label>
+      <div class="full"><label>產品使用的無線介面</label>
+        <div class="chips" style="margin-top:6px">
+          <label><input type="checkbox">藍牙</label><label><input type="checkbox">Wi-Fi</label><label><input type="checkbox">行動網路</label><label><input type="checkbox">NFC</label><label><input type="checkbox">其他</label>
+        </div>
+      </div>
+      <label class="full">產品架構
+        <select><option>僅裝置</option><option>裝置 + App</option><option>裝置 + App + Server</option><option>尚不確定</option></select>
+      </label>
+      <label class="full">產品說明<textarea id="msg" placeholder="產品類型、目標市場、預計上市時間等"></textarea></label>
+      <div class="full"><button class="btn btn-primary" type="submit">送出 →</button></div>
+    </form>
+  </div>
+</section>
+
+<!-- 9. 延伸閱讀 -->
+<section id="related">
+  <div class="wrap">
+    <p class="eyebrow">Related</p>
+    <h2>延伸閱讀</h2>
+    <div class="related" style="margin-top:24px">
+      <a href="#">EN 18031 檢測完整指南<span>測什麼、怎麼測、如何準備</span></a>
+      <a href="#">EU CRA 網路韌性法案<span>產品分類與符合性評估路徑</span></a>
+      <a href="#">支付與金融認證<span>PCI PTS、EMVCo、MPoC</span></a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap"><span>© Secure Vectors Surveillance Inc. · 安合規律檢驗有限公司</span><span>ISO/IEC 17025 · Applus+ Laboratories Alliance Partner &amp; Recognized Laboratory</span></div></footer>
+
+<script>
+/* ---------- icons ---------- */
+const ICONS={
+  user:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  bank:'<path d="M3 21h18M5 21V10M19 21V10M9 21V10M15 21V10M2 10l10-7 10 7z"/>',
+  key:'<circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.7 12.3L21 2M16 7l3 3M18.5 4.5l2 2"/>',
+  lock:'<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  unlock:'<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/>',
+  ban:'<circle cx="12" cy="12" r="10"/><path d="M4.93 4.93l14.14 14.14"/>',
+  refresh:'<path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>',
+  phone:'<rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/>',
+  cpu:'<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/>',
+  layers:'<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>',
+  search:'<circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>',
+  folder:'<path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><path d="M12 10v4M12 17h.01"/>',
+  bt:'<path d="M6.5 6.5l11 11L12 23V1l5.5 5.5-11 11"/>',
+  check:'<path d="M20 6L9 17l-5-5"/>'
+};
+const svg=n=>`<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n]}</svg>`;
+document.querySelectorAll('[data-ic]').forEach(el=>el.insertAdjacentHTML('afterbegin',svg(el.dataset.ic)));
+
+/* ---------- 適用判斷 v4 ---------- */
+const STD={
+  1:{c:'EN 18031-1',a:'RED Article 3(3)(d)',q:'會不會危害網路？',d:'可透過網際網路通訊的無線產品。'},
+  2:{c:'EN 18031-2',a:'RED Article 3(3)(e)',q:'有沒有保護個資？',d:'處理個人資料的連網產品，以及兒童玩具、兒童照護設備與穿戴裝置（即使不連網）。'},
+  3:{c:'EN 18031-3',a:'RED Article 3(3)(f)',q:'有沒有保護金流？',d:'可轉移金錢、貨幣價值或虛擬貨幣的連網產品。'}
+};
+const RISK=[
+  {t:'涉及金流、支付或虛擬貨幣轉移',s:'EN 18031-3',nb:'適用 EN 18031-3：安全更新項目不具符合性推定'},
+  {t:'允許使用者「不設定密碼」即可登入',s:'',nb:'允許使用者不設定密碼或不使用密碼'},
+  {t:'屬於兒童玩具／照護設備，且「無提供家長控制功能」',s:'',nb:'兒童玩具或兒童照護設備未提供家長存取控制'}
+];
+const Q=[
+  {s:'無線功能＋歐盟市場',t:'您的產品是否具備無線通訊功能，並計畫（或正在）銷往歐盟市場？',h:'例如 Wi-Fi、藍牙、3G/4G/5G、NFC 等。'},
+  {s:'連網功能',t:'設備是否具備直接或間接的「連網功能」？',h:'間接連網：例如透過藍牙連接手機 App，再由 App 連上網路。'},
+  {s:'個人資料',t:'設備運作時，是否會收集、儲存或處理「個人隱私資料」？',h:'例如帳號、位置、影像、聲音、健康或使用紀錄。'},
+  {s:'高風險情境',t:'您的設備是否符合以下任一高風險情境？',h:'可複選；若皆不符合，請點「以上皆無」。',multi:true}
+];
+let A=[],sel=[];
+const panel=document.getElementById('qpanel'),trail=document.getElementById('trail');
+const bar=n=>'<div class="progress">'+Q.map((_,i)=>`<i class="${i<n?'on':''}"></i>`).join('')+'</div>';
+const yn=v=>`<b class="${v?'yes':'no'}">${v?'是':'否'}</b>`;
+function render(){
+  trail.innerHTML=A.length?'<ul class="trail">'+A.map((a,i)=>`<li><span>${Q[i].s}</span>${Array.isArray(a)?`<b class="${a.length?'risk':'yes'}">${a.length?a.map(x=>['金流','免密碼','兒童無家長控制'][x]).join('、'):'以上皆無'}</b>`:yn(a)}</li>`).join('')+'</ul>':'<p class="empty">尚未作答</p>';
+  const i=A.length;
+  const fin=A[0]===false||i===Q.length;document.getElementById('disc').hidden=!fin;
+  if(fin){panel.innerHTML=bar(Q.length)+result();return}
+  const q=Q[i];
+  let body;
+  if(q.multi){
+    body=`<div class="opt-list">${RISK.map((r,j)=>`<button class="opt" aria-pressed="${sel.includes(j)}" onclick="tog(${j})"><span class="bx">${svg('check')}</span><span>${r.t}${r.s?`<small>（${r.s}）</small>`:''}</span></button>`).join('')}</div>
+      <div class="q4-actions"><button onclick="ans([])">以上皆無</button><button class="go" ${sel.length?'':'disabled'} onclick="ans(sel.slice())">下一步${sel.length?`（已選 ${sel.length} 項）`:''}</button></div>`;
+  }else body=`<div class="answers"><button onclick="ans(true)">是</button><button onclick="ans(false)">否</button></div>`;
+  panel.innerHTML=`${bar(i+1)}<div class="qnum">第 ${i+1} 題 / 共 ${Q.length} 題</div><p class="qtext">${q.t}</p><p class="qhint">${q.h}</p>${body}${i?'<button class="back" onclick="back()">← 上一題</button>':''}`;
+}
+function result(){
+  const nav='<div style="margin-top:16px"><button class="back" onclick="back()">← 上一題</button>　<button class="back" onclick="reset()">重新開始</button></div>';
+  if(A[0]===false) return `<div class="stateN"><span class="flag">判斷結果</span><div class="res-head"><span class="dot"></span>暫不受 RED 規範限制</div>
+    <p class="res-body">您的產品暫不受歐盟 RED（EN 18031）規範限制。若產品功能或銷售市場有調整，建議重新評估。</p>${nav}</div>`;
+  const [,net,pii,risk]=A, out=[];
+  if(net) out.push([1,'您回答：具備連網功能']);
+  if(pii) out.push([2,net?'您回答：連網，且處理個人資料':'您回答：處理個人資料（未連網產品僅限兒童玩具、兒童照護設備或穿戴裝置）']);
+  else if(risk.includes(2)) out.push([2,'您回答：屬於兒童玩具／照護設備']);
+  if(risk.includes(0)) out.push([3,'您回答：涉及金流、支付或虛擬貨幣轉移'+(net?'':'（EN 18031-3 適用於連網產品）')]);
+  if(!out.length) return `<div class="stateC"><span class="flag">判斷結果</span><div class="res-head"><span class="dot"></span>可能不需符合 EN 18031</div>
+    <p class="res-body">依您的作答，產品未連網、未處理個人資料，可能不在 EN 18031 範圍內。但若產品為兒童玩具、兒童照護設備或穿戴裝置，仍可能適用 EN 18031-2，建議與 Lab 確認。</p>
+    <a class="btn btn-outline" href="#contact" onclick="prefill('適用判斷：可能不適用，請協助確認')">請 Lab 協助確認 →</a>${nav}</div>`;
+  const cards=out.map(([k,why])=>{const s=STD[k];return `<div class="sc"><span class="c">${s.c}</span><div><b>${s.q}</b> <span class="a">${s.a}</span></div><p>${s.d}</p><span class="why">${why}</span></div>`}).join('');
+  const codes=out.map(o=>STD[o[0]].c).join('、');
+  let route;
+  if(risk.length){
+    route=`<div class="route-box nb"><h4><span class="pill">須經 NB 評估</span>涉及限制條件</h4>
+      <p>EN 18031 附帶部分限制條件。您的產品涉及以下標示情形，該部分不具符合性推定，須另經公告機構（NB）評估：</p>
+      <ul>${RISK.map((r,j)=>`<li class="${risk.includes(j)?'hit':'off'}">${r.nb}${risk.includes(j)?'　← 您的作答':''}</li>`).join('')}</ul>
+      <p class="neutral">安合於台北執行 EN 18031 技術檢測並出具檢測報告。報告可提供予公告機構（如 Applus+ Laboratories，NB 0370）作為審查參考。</p></div>
+      <div class="res-ctas"><a class="btn btn-blue" href="#contact" onclick="prefill('適用判斷：須經 NB 評估｜${codes}')">預約檢測與 NB 路徑確認 →</a><a class="btn btn-outline" href="#process">了解檢測流程 ↓</a></div>`;
+  }else{
+    route=`<div class="route-box self"><h4><span class="pill">可自我宣告</span>完整套用標準，且未涉及限制條件</h4>
+      <p>製造商可自行宣告符合，並備妥技術文件，供歐盟主管機關隨時調閱。</p>
+      <ul><li>第三方檢測報告可作為技術文件的客觀佐證</li><li>有助於因應市場抽查</li></ul></div>
+      <div class="res-ctas"><a class="btn btn-blue" href="#contact" onclick="prefill('適用判斷：可自我宣告｜${codes}')">預約第三方檢測評估 →</a><a class="btn btn-outline" href="#process">了解檢測流程 ↓</a></div>`;
+  }
+  return `<div class="${risk.length?'stateA':'stateB'}"><span class="flag">判斷結果</span><div class="res-head"><span class="dot"></span>${out.length>1?`需同時符合 ${out.length} 份標準`:'需符合 1 份標準'}</div>
+    <div class="res-sec">您的產品適用</div>${cards}${out.length>1?'<p class="res-body" style="margin:4px 0 0">各標準對應不同的法規要求，須<b>同時符合</b>，無法擇一。</p>':''}<div class="res-sec">合規路徑</div>${route}${nav}</div>`;
+}
+function tog(j){sel=sel.includes(j)?sel.filter(x=>x!==j):[...sel,j];render()}
+function ans(a){A.push(a);render()}
+function back(){const x=A.pop();if(Array.isArray(x))sel=x;render()}
+function reset(){A=[];sel=[];render()}
+function prefill(s){document.getElementById('svcSel').value='EN 18031 / RED';const m=document.getElementById('msg');m.value=s+'\n'+m.value.replace(/^適用判斷：.*\n?/m,'');}
+render();
+document.querySelectorAll('[data-prefill]').forEach(a=>a.addEventListener('click',()=>prefill(a.dataset.prefill)));
+
+/* ---------- 8 步流程：左右版面 / 手機展開 ---------- */
+const tabs=[...document.querySelectorAll('.steplist button')],panes=[...document.querySelectorAll('.sp')];
+let cur=0;
+function show(i){cur=(i+panes.length)%panes.length;tabs.forEach((t,j)=>t.setAttribute('aria-selected',j===cur));panes.forEach((p,j)=>p.classList.toggle('active',j===cur));
+  document.getElementById('spPrev').disabled=cur===0;document.getElementById('spNext').disabled=cur===panes.length-1;}
+tabs.forEach(t=>t.addEventListener('click',()=>show(+t.dataset.i)));
+document.getElementById('spPrev').addEventListener('click',()=>show(cur-1));
+document.getElementById('spNext').addEventListener('click',()=>show(cur+1));
+show(0);
+document.querySelectorAll('.exp-btn').forEach(b=>b.addEventListener('click',()=>{
+  const st=b.closest('.sp'),open=!st.classList.contains('open');
+  st.classList.toggle('open',open);b.setAttribute('aria-expanded',open);
+  b.lastChild.textContent=open?'收合檢測細節':'展開檢測細節';
+}));
+
+/* ---------- 互動檢核表 ---------- */
+const G=[
+  {t:'階段 1：確認範圍前',e:'Scope Definition',h:'在確認檢測範圍前，建議先準備以下資訊。',items:[
+    ['產品簡介與目標市場','確認銷往歐盟、美國或兩者皆是'],
+    ['無線介面清單','盤點設備具備哪些通訊模組，及實際開啟的介面'],
+    ['聯網架構與資料流','確認是否有專屬 App 與 Server，以及處理哪些機敏資料'],
+    ['開發團隊與紀錄盤點','釐清軟韌體開發者（含委外），並收集現有開發紀錄'],
+    ['現有韌體更新機制','釐清目前的更新方式與驗證流程']]},
+  {t:'階段 2：正式送測時',e:'Official Testing',h:'進入實驗室實測階段時需備妥的實體與文件。',items:[
+    ['至少 3 件測試實體樣品',''],
+    ['使用者手冊與技術設計文件',''],
+    ['硬體與軟體物料清單（BOM & SBOM）','<em>若無 SBOM，安合可透過 Black Duck 協助生成</em>'],
+    ['未加密之韌體，與觸發更新檔的方式',''],
+    ['軟體／韌體弱點掃描報告','']]}
+];
+const groups=document.getElementById('groups');
+groups.innerHTML=G.map((g,gi)=>`<div class="grp"><button class="grp-h" type="button" aria-expanded="true" onclick="toggleGrp(this)"><span class="t">${g.t}<small>${g.e} · ${g.h}</small></span><span class="cnt" id="gc${gi}">0 / ${g.items.length}</span></button>
+  <div class="grp-b">${g.items.map((it,ii)=>`<label class="item"><input type="checkbox" data-g="${gi}" data-name="${it[0]}"><span class="box-c">${svg('check')}</span><span class="txt"><b>${it[0]}</b>${it[1]?`<small>${it[1]}</small>`:''}</span></label>`).join('')}</div></div>`).join('');
+function toggleGrp(b){const body=b.nextElementSibling,open=body.style.display!=='none';body.style.display=open?'none':'';b.setAttribute('aria-expanded',!open)}
+const boxes=[...groups.querySelectorAll('input')];
+function upd(){
+  const n=boxes.filter(b=>b.checked).length;
+  document.getElementById('ckCount').textContent=`${n} / ${boxes.length}`;
+  document.getElementById('ckBar').style.width=(n/boxes.length*100)+'%';
+  document.getElementById('ckMiss').textContent=n===boxes.length?'已全部備妥':`尚缺 ${boxes.length-n} 項`;
+  G.forEach((g,gi)=>{document.getElementById('gc'+gi).textContent=`${boxes.filter(b=>b.dataset.g==gi&&b.checked).length} / ${g.items.length}`});
+  boxes.forEach(b=>b.closest('.item').classList.toggle('done',b.checked));
+}
+boxes.forEach(b=>b.addEventListener('change',upd));
+document.getElementById('ckCta').addEventListener('click',()=>{
+  const n=boxes.filter(b=>b.checked).length, miss=boxes.filter(b=>!b.checked).map(b=>b.dataset.name);
+  const m=document.getElementById('msg');
+  m.value=m.value.replace(/\n?盤點進度：[\s\S]*$/,'')+`${m.value?'\n':''}盤點進度：${n} / ${boxes.length}${miss.length?'\n尚未備妥：'+miss.join('、'):''}`;
+  document.getElementById('svcSel').value='EN 18031 / RED';
+});
+</script>
+</body>
+</html>
